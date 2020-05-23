@@ -13,11 +13,16 @@
       </label>
     </section>
 
-    <section class="info">
-      <p v-show="interimTranscript" class="interimTranscript">
+    <section class="logs">
+      <p v-show="interimTranscript" class="interimTranscript balloon4">
         {{ interimTranscript }}
       </p>
-      <p v-for="(item, i) in filteredLog" :key="i" :class="item.type">
+      <p
+        v-for="(item, i) in filteredLog"
+        :key="i"
+        class="balloon3-left"
+        :class="item.type"
+      >
         <span>
           {{ item.value }}
         </span>
@@ -53,7 +58,7 @@ export default Vue.extend({
     return {
       interimTranscript: '',
       logs: [] as Log[],
-      showSystemLog: true,
+      showSystemLog: false,
     }
   },
   computed: {
@@ -133,9 +138,13 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.info {
+.logs {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+p {
+  margin: 10px;
 }
 .interimTranscript {
   color: #999;
@@ -149,10 +158,68 @@ export default Vue.extend({
   // font-weight: 700;
   font-size: 24px;
 
-  border: 1px solid #666;
-  border-radius: 24px;
-  padding: 4px 12px;
+  // border: 1px solid #666;
+  // border-radius: 24px;
+  // padding: 4px 12px;
 }
+
+.balloon3-left {
+  position: relative;
+  padding: 20px;
+  // line-height: 90px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  background: #ffcc75;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.balloon3-left:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -25px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-right: 15px solid #ffcc75;
+  z-index: 0;
+}
+
+.balloon4 {
+  position: relative;
+  margin: 2em 0 2em 40px;
+  padding: 15px;
+  background: #fff0c6;
+  border-radius: 30px;
+}
+
+.balloon4:before {
+  content: '';
+  position: absolute;
+  left: -38px;
+  width: 13px;
+  height: 12px;
+  bottom: 0;
+  background: #fff0c6;
+  border-radius: 50%;
+}
+
+.balloon4:after {
+  content: '';
+  position: absolute;
+  left: -24px;
+  width: 20px;
+  height: 18px;
+  bottom: 3px;
+  background: #fff0c6;
+  border-radius: 50%;
+}
+.balloon4 p {
+  margin: 0;
+  padding: 0;
+}
+
 .time {
   font-size: 12px;
 }
